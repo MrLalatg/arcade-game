@@ -1,34 +1,91 @@
 // Enemies our player must avoid
-var Enemy = function() {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
+class Enemy {
+    constructor(y) {
 
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
-    this.sprite = 'images/enemy-bug.png';
-};
+    	this.x = -101;
+    	this.y = 125 + (y*81);
+    	this.speed = Math.floor(Math.random() * (500 - 100)) + 100;
+        // Variables applied to each of our instances go here,
+        // we've provided one for you to get started
 
-// Update the enemy's position, required method for game
-// Parameter: dt, a time delta between ticks
-Enemy.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
-};
+        // The image/sprite for our enemies, this uses
+        // a helper we've provided to easily load images
+        this.sprite = 'images/enemy-bug.png';
+    }
 
-// Draw the enemy on the screen, required method for game
-Enemy.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};
+    // Update the enemy's position, required method for game
+    // Parameter: dt, a time delta between ticks
+    update(dt) {
+    	this.x += this.speed*dt;
+       
+        // You should multiply any movement by the dt parameter
+        // which will ensure the game runs at the same speed for
+        // all computers.
+    }
+
+    // Draw the enemy on the screen, required method for game
+    render() {
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    }
+}
 
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
 
+class Player {
+	constructor(){
+		this.startX = 202;
+		this.startY = 449;
+		this.x = this.startX;
+		this.y = this.startY;
+		this.sprite = "images/char-boy.png";
+	}
+
+	update(x, y){
+		this.x = x;
+		this.y = y;
+		this.render();
+	}
+
+	handleInput(direction){
+		switch(direction){
+			case "left":
+				this.update(this.x - 101, this.y);
+				if(this.x < 0)
+					this.update(this.x + 101, this.y);
+				break;
+			case "right":
+				this.update(this.x + 101, this.y);
+				if(this.x > canvas.width - 101)
+					this.update(this.x - 101, this.y);
+				break;
+			case "up":
+				this.update(this.x, this.y - 81);
+				if(this.y < 0)
+					this.update(this.x, this.y + 81);
+				break;
+			case "down":
+				this.update(this.x, this.y + 81);
+				if(this.y > canvas.height - 81 - 70)
+					this.update(this.x, this.y - 81);
+				break;
+		}
+	}
+
+	render(){
+
+		ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+	}
+}
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
+
+allEnemies = [new Enemy(0), new Enemy(1), new Enemy(1)];
+player = new Player();
+
 
 
 

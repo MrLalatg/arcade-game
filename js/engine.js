@@ -58,6 +58,18 @@ var Engine = (function(global) {
         win.requestAnimationFrame(main);
     }
 
+    function checkCondition(){
+        
+    }
+
+    function checkCollisions() {
+        allEnemies.forEach(function(enemy){
+            if(((enemy.x >= player.x && enemy.x <= player.x + 101) && (enemy.y >= player.y && enemy.y <= player.y + 81) || ((enemy.x + 80 >= player.x && enemy.x + 80 <= player.x + 101) && (enemy.y + 60 >= player.y && enemy.y + 60 <= player.y + 81)))){
+                player.x = player.startX;
+                player.y = player.startY;
+            }
+        });
+    }
     /* This function does some initial setup that should only occur once,
      * particularly setting the lastTime variable that is required for the
      * game loop.
@@ -79,7 +91,7 @@ var Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
-        // checkCollisions();
+        checkCollisions();
     }
 
     /* This is called by the update function and loops through all of the
@@ -93,7 +105,7 @@ var Engine = (function(global) {
         allEnemies.forEach(function(enemy) {
             enemy.update(dt);
         });
-        player.update();
+        player.update(player.x, player.y);
     }
 
     /* This function initially draws the "game level", it will then call
@@ -182,4 +194,6 @@ var Engine = (function(global) {
      * from within their app.js files.
      */
     global.ctx = ctx;
+    global.canvas = canvas;
+
 })(this);
