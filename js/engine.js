@@ -64,7 +64,7 @@ var Engine = (function(global) {
 
     function checkCollisions() {
         allEnemies.forEach(function(enemy){
-            if(((enemy.x >= player.x && enemy.x <= player.x + 101) && (enemy.y >= player.y && enemy.y <= player.y + 81) || ((enemy.x + 80 >= player.x && enemy.x + 80 <= player.x + 101) && (enemy.y + 60 >= player.y && enemy.y + 60 <= player.y + 81)))){
+            if(((enemy.x >= player.x && enemy.x <= player.x + 81) && (enemy.y >= player.y && enemy.y <= player.y + 71) || ((enemy.x + 80 >= player.x && enemy.x + 80 <= player.x + 101) && (enemy.y + 60 >= player.y && enemy.y + 60 <= player.y + 81)))){
                 player.x = player.startX;
                 player.y = player.startY;
             }
@@ -104,6 +104,9 @@ var Engine = (function(global) {
     function updateEntities(dt) {
         allEnemies.forEach(function(enemy) {
             enemy.update(dt);
+            if(enemy.x > canvas.width || enemy.x < -101){
+                enemy.changeDirection();
+            }
         });
         player.update(player.x, player.y);
     }
@@ -185,6 +188,7 @@ var Engine = (function(global) {
         'images/water-block.png',
         'images/grass-block.png',
         'images/enemy-bug.png',
+        'images/enemy-bug-left.png',
         'images/char-boy.png'
     ]);
     Resources.onReady(init);

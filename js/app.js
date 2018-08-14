@@ -1,18 +1,29 @@
 // Enemies our player must avoid
 class Enemy {
-    constructor(y) {
+    constructor(y, isRight = true) {
 
-    	this.x = -101;
+    	this.isRight = isRight;
+    	this.isRight ? this.x = -101 : this.x = 505;
     	this.y = 125 + (y*81);
     	this.speed = Math.floor(Math.random() * (500 - 100)) + 100;
+        this.isRight ? this.speed = this.speed : this.speed = -this.speed;
         // Variables applied to each of our instances go here,
         // we've provided one for you to get started
 
         // The image/sprite for our enemies, this uses
         // a helper we've provided to easily load images
-        this.sprite = 'images/enemy-bug.png';
+        this.isRight ? this.sprite = 'images/enemy-bug.png' : this.sprite = 'images/enemy-bug-left.png';
     }
 
+    changeDirection(){
+    	this.speed = Math.floor(Math.random() * (500 - 100)) + 100;
+
+    	//Interesting construction, huh? Works like if(){}, I found it myself :)
+    	this.isRight && (this.speed = this.speed * -1);
+        
+        this.isRight = !this.isRight;
+    	this.sprite =  `images/enemy-bug${ this.isRight ? '': '-left'}.png` 
+    }
     // Update the enemy's position, required method for game
     // Parameter: dt, a time delta between ticks
     update(dt) {
@@ -83,7 +94,7 @@ class Player {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
-allEnemies = [new Enemy(0), new Enemy(1), new Enemy(1)];
+allEnemies = [new Enemy(0), new Enemy(1, false), new Enemy(1)];
 player = new Player();
 
 
@@ -91,7 +102,7 @@ player = new Player();
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
-document.addEventListener('keyup', function(e) {
+document.addEventListener('keydown', function(e) {
     var allowedKeys = {
         37: 'left',
         38: 'up',
