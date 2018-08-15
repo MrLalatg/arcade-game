@@ -23,6 +23,9 @@ var Engine = (function(global) {
         canvas = doc.createElement('canvas'),
         ctx = canvas.getContext('2d'),
         lastTime;
+        winFlag = false;
+        modalRestart = document.querySelector("#modalRestart");
+        modalExit = document.querySelector("#modalExit");
 
     canvas.width = 505;
     canvas.height = 606;
@@ -55,11 +58,15 @@ var Engine = (function(global) {
         /* Use the browser's requestAnimationFrame function to call this
          * function again as soon as the browser is able to draw another frame.
          */
-        win.requestAnimationFrame(main);
+        if(!winFlag){
+            win.requestAnimationFrame(main);
+        }
     }
 
-    function checkCondition(){
-        
+    function checkWinCondition(){
+        if(player.y === 44){
+            return true;
+        }
     }
 
     function checkCollisions() {
@@ -92,6 +99,10 @@ var Engine = (function(global) {
     function update(dt) {
         updateEntities(dt);
         checkCollisions();
+        if(checkWinCondition()){
+            winFlag = true;
+            $("#winModal").modal();
+        }
     }
 
     /* This is called by the update function and loops through all of the
@@ -192,6 +203,18 @@ var Engine = (function(global) {
         'images/char-boy.png'
     ]);
     Resources.onReady(init);
+
+    modalRestart.addEventListener("click", function(){
+        winFlag = false;
+        player.x = player.startX;
+        player.y = player.startY;
+        allEnemies = [new Enemy(0), new Enemy(1, false), new Enemy(1), new Enemy(2, false)];
+        main();
+    });
+
+    modalExit.addEventListener("click", function(){
+        win.close();
+    });
 
     /* Assign the canvas' context object to the global variable (the window
      * object when run in a browser) so that developers can use it more easily

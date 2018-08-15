@@ -94,7 +94,7 @@ class Player {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
-allEnemies = [new Enemy(0), new Enemy(1, false), new Enemy(1)];
+allEnemies = [new Enemy(0), new Enemy(1, false), new Enemy(1), new Enemy(2, false)];
 player = new Player();
 
 
@@ -112,3 +112,5 @@ document.addEventListener('keydown', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
+
