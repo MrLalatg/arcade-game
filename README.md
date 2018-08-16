@@ -6,7 +6,7 @@ To run the game just run index.html in any browser u want.(Tested in Chrome)
 
 ## How to edit project?
 
-###JS
+### JS
 All JS files are in the corresponding folder, there are three js files:
 
 * Engine.js - This file provides the game loop functionality (update entities and render), draws the initial game board on the screen, and then calls the update and render methods on our player and enemy objects.
@@ -18,13 +18,13 @@ Also I am using bootstrap and jquery libraries here is links:
 * [JQuery](https://jquery.com/)
 * [Bootstrap](https://getbootstrap.com/)
 
-###HTML
+### HTML
 All HTML is stored in index.html file.
 
-###CSS
+### CSS
 CSS file is in the corresponding folder, I am also using some styles from [Bootstrap](https://getbootstrap.com/)
 
-##Contributing
+## Contributing
 If u want to perform a pull request please do it in the right way. Here's the template:
 
 1. Why u want to do this pull request?
