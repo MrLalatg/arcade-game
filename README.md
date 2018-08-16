@@ -1,6 +1,34 @@
-frontend-nanodegree-arcade-game
-===============================
+# Arcade game clone
 
-Students should use this [rubric](https://review.udacity.com/#!/projects/2696458597/rubric) for self-checking their submission. Make sure the functions you write are **object-oriented** - either class functions (like Player and Enemy) or class prototype functions such as Enemy.prototype.checkCollisions, and that the keyword 'this' is used appropriately within your class and class prototype functions to refer to the object the function is called upon. Also be sure that the **readme.md** file is updated with your instructions on both how to 1. Run and 2. Play your arcade game.
+## How to run the game?
 
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
+To run the game just run index.html in any browser u want.(Tested in Chrome)
+
+## How to edit project?
+
+###JS
+All JS files are in the corresponding folder, there are three js files:
+
+* Engine.js - This file provides the game loop functionality (update entities and render), draws the initial game board on the screen, and then calls the update and render methods on our player and enemy objects.
+* Resources.js - This is simply an image loading utility. It eases the process of loading image files so that they can be used within your game. It also includes a simple "caching" layer so it will reuse cached images if you attempt to load the same image multiple times.
+* App.js - This file provides our enemy and player functionality. Most of my work is here.
+
+Also I am using bootstrap and jquery libraries here is links:
+
+* [JQuery](https://jquery.com/)
+* [Bootstrap](https://getbootstrap.com/)
+
+###HTML
+All HTML is stored in index.html file.
+
+###CSS
+CSS file is in the corresponding folder, I am also using some styles from [Bootstrap](https://getbootstrap.com/)
+
+##Contributing
+If u want to perform a pull request please do it in the right way. Here's the template:
+
+1. Why u want to do this pull request?
+2. Which files will be changed?
+
+**ATTENTION** All pull request will be applied to `pull-request` branch, and maybe after some time to master.
+Please be patient, we will consider your request as soon as possible
